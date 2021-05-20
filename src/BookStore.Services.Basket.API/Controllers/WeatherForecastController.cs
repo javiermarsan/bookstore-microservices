@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace BookStore.Services.Basket.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
