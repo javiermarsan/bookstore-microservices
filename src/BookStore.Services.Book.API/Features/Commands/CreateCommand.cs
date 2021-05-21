@@ -16,14 +16,14 @@ namespace BookStore.Services.Book.API.Features.Commands
 
         public DateTime? PublicationDate { get; set; }
 
-        public Guid BookAuthorId { get; set; }
+        public Guid AuthorId { get; set; }
 
         public class CreateCommandValidator : AbstractValidator<CreateCommand>
         {
             public CreateCommandValidator()
             {
                 RuleFor(x => x.Title).NotEmpty().MaximumLength(500);
-                RuleFor(x => x.BookAuthorId).NotEmpty();
+                RuleFor(x => x.AuthorId).NotEmpty();
             }
         }
 
@@ -42,7 +42,7 @@ namespace BookStore.Services.Book.API.Features.Commands
                 {
                     Title = request.Title,
                     PublicationDate = request.PublicationDate,
-                    BookAuthorId = request.BookAuthorId
+                    AuthorId = request.AuthorId
                 };
 
                 _context.Book.Add(book);

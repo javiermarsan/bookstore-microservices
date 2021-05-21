@@ -19,7 +19,7 @@ namespace BookStore.Services.Book.API.Features.Commands
 
         public DateTime? PublicationDate { get; set; }
 
-        public Guid BookAuthorId { get; set; }
+        public Guid AuthorId { get; set; }
 
         public class UpdateCommandValidator : AbstractValidator<UpdateCommand>
         {
@@ -27,7 +27,7 @@ namespace BookStore.Services.Book.API.Features.Commands
             {
                 RuleFor(x => x.BookId).NotEmpty();
                 RuleFor(x => x.Title).NotEmpty().MaximumLength(500);
-                RuleFor(x => x.BookAuthorId).NotEmpty();
+                RuleFor(x => x.AuthorId).NotEmpty();
             }
         }
 
@@ -48,7 +48,7 @@ namespace BookStore.Services.Book.API.Features.Commands
 
                 entity.Title = request.Title;
                 entity.PublicationDate = request.PublicationDate;
-                entity.BookAuthorId = request.BookAuthorId;
+                entity.AuthorId = request.AuthorId;
 
                 await _context.SaveChangesAsync();
                 

@@ -7,12 +7,12 @@ namespace BookStore.Services.Book.API.Features.Queries
 {
     public class BookDto
     {
-        public Guid? BookId { get; set; }
+        public Guid BookId { get; set; }
 
         public string Title { get; set; }
 
         public DateTime? PublicationDate { get; set; }
 
-        public Guid? BookAuthorId { get; set; }
+        public Guid AuthorId { get; set; }
     }
 }

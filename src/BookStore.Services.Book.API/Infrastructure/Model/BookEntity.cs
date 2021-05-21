@@ -21,6 +21,6 @@ namespace BookStore.Services.Book.API.Infrastructure.Model
         public DateTime? PublicationDate { get; set; }
 
         [Required]
-        public Guid BookAuthorId { get; set; }
+        public Guid AuthorId { get; set; }
     }
 }
