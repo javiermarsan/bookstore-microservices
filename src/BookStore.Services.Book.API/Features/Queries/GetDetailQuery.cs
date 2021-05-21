@@ -28,12 +28,12 @@ namespace BookStore.Services.Book.API.Features.Queries
 
             public async Task<BookDto> Handle(GetDetailQuery request, CancellationToken cancellationToken)
             {
-                var libro = await _context.Book.Where(x => x.BookId == request.BookId).FirstOrDefaultAsync();
-                if (libro == null)
+                var entity = await _context.Book.Where(x => x.BookId == request.BookId).FirstOrDefaultAsync();
+                if (entity == null)
                     throw new Exception("Book not found");
 
-                var libroDto = _mapper.Map<BookEntity, BookDto>(libro);
-                return libroDto;
+                var dto = _mapper.Map<BookEntity, BookDto>(entity);
+                return dto;
             }
         }
     }
