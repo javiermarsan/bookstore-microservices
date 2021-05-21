@@ -11,6 +11,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation.AspNetCore;
+using MediatR;
+using BookStore.Services.Author.API.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+using BookStore.Services.Author.API.Features.Commands;
+using AutoMapper;
+using BookStore.Services.Author.API.Features.Queries;
 
 namespace BookStore.Services.Author.API
 {
@@ -26,12 +33,20 @@ namespace BookStore.Services.Author.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<CreateCommand.CreateCommandValidator>());
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookStore.Services.Author.API", Version = "v1" });
             });
+
+            services.AddDbContext<AuthorContext>(opt =>
+            {
+                opt.UseSqlServer(Configuration.GetConnectionString("DbConnection"));
+            });
+
+            services.AddMediatR(typeof(CreateCommand.CreateCommandHandler).Assembly);
+
+            services.AddAutoMapper(typeof(GetListQuery));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
