@@ -22,19 +22,44 @@ namespace BookStore.Services.Book.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Unit>> Create(CreateCommand data)
+        public async Task<ActionResult<Guid>> CreateBook(CreateCommand data)
         {
-            return await _mediator.Send(data);
+            Guid newId = await _mediator.Send(data);
+            return newId;
+        }
+
+        [HttpPut]
+        //[HttpPost]
+        //[Route("update")]
+        public async Task<ActionResult> UpdateBook(UpdateCommand data)
+        {
+            bool found = await _mediator.Send(data);
+            if (!found)
+                return NotFound();
+
+            return NoContent();
+        }
+
+        [HttpDelete]
+        //[HttpPost]
+        //[Route("delete")]
+        public async Task<ActionResult> DeleteBook(DeleteCommand data)
+        {
+            bool found = await _mediator.Send(data);
+            if (!found)
+                return NotFound();
+
+            return NoContent();
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<BookDto>>> GetList()
+        public async Task<ActionResult<List<BookDto>>> GetBooks()
         {
             return await _mediator.Send(new GetListQuery());
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<BookDto>> GetDetail(Guid id)
+        public async Task<ActionResult<BookDto>> GetBookById(Guid id)
         {
             return await _mediator.Send(new GetDetailQuery { BookId = id });
         }

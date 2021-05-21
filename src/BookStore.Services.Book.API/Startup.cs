@@ -33,7 +33,7 @@ namespace BookStore.Services.Book.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<CreateCommand>());
+            services.AddControllers().AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<CreateCommand.CreateCommandValidator>());
 
             services.AddSwaggerGen(c =>
             {
@@ -45,7 +45,7 @@ namespace BookStore.Services.Book.API
                 opt.UseSqlServer(Configuration.GetConnectionString("DbConnection"));
             });
 
-            services.AddMediatR(typeof(CreateCommandHandler).Assembly);
+            services.AddMediatR(typeof(CreateCommand.CreateCommandHandler).Assembly);
 
             services.AddAutoMapper(typeof(GetListQuery));
         }
