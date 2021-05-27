@@ -1,7 +1,13 @@
+using BookStore.Services.Basket.API.Features.Commands;
+using BookStore.Services.Basket.API.Infrastructure;
+using BookStore.Services.Basket.API.Remote.Interface;
+using BookStore.Services.Basket.API.Remote.Service;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,11 +32,24 @@ namespace BookStore.Services.Basket.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IBookService, BookService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookStore.Services.Basket.API", Version = "v1" });
+            });
+
+            services.AddDbContext<BasketContext>(opt =>
+            {
+                opt.UseSqlServer(Configuration.GetConnectionString("DbConnection"));
+            });
+
+            services.AddMediatR(typeof(CreateCommand.CreateCommandHandler).Assembly);
+
+            services.AddHttpClient("BooksHttp", config =>
+            {
+                config.BaseAddress = new Uri(Configuration["Services:Books"]);
             });
         }
 
