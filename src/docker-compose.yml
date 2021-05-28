@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  bookstore.apigateway:
+    image: ${DOCKER_REGISTRY-}bookstoreapigateway
+    build:
+      context: .
+      dockerfile: BookStore.ApiGateway\Dockerfile
+
+  bookstore.services.author.api:
+    image: ${DOCKER_REGISTRY-}bookstoreservicesauthorapi
+    build:
+      context: .
+      dockerfile: BookStore.Services.Author.API\Dockerfile
+
+  bookstore.services.basket.api:
+    image: ${DOCKER_REGISTRY-}bookstoreservicesbasketapi
+    build:
+      context: .
+      dockerfile: BookStore.Services.Basket.API\Dockerfile
+
+  bookstore.services.book.api:
+    image: ${DOCKER_REGISTRY-}bookstoreservicesbookapi
+    build:
+      context: .
+      dockerfile: BookStore.Services.Book.API\Dockerfile
+

@@ -5,7 +5,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "bookstore.api.book",
+          "Host": "bookstore.services.book.api",
           "Port": "80"
         }
       ],
@@ -18,7 +18,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "bookstore.api.book",
+          "Host": "bookstore.services.book.api",
           "Port": "80"
         }
       ],
@@ -33,7 +33,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "bookstore.api.author",
+          "Host": "bookstore.services.author.api",
           "Port": "80"
         }
       ],
@@ -46,7 +46,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "bookstore.api.author",
+          "Host": "bookstore.services.author.api",
           "Port": "80"
         }
       ],
@@ -59,7 +59,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "bookstore.api.basket",
+          "Host": "bookstore.services.basket.api",
           "Port": "80"
         }
       ],
@@ -71,7 +71,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "bookstore.api.basket",
+          "Host": "bookstore.services.basket.api",
           "Port": "80"
         }
       ],
