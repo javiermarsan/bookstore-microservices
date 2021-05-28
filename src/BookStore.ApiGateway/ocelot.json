@@ -1,0 +1,92 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/Book",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "bookstore.api.book",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Book",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+      "Key": "BookTotal"
+    },
+    {
+      "DownstreamPathTemplate": "/api/Book/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "bookstore.api.book",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Book/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "DelegatingHandlers": [
+        "BookHandler"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Author",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "bookstore.api.author",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Author",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+      "Key": "AuthorTotal"
+    },
+    {
+      "DownstreamPathTemplate": "/api/Author/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "bookstore.api.author",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Author/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "Key": "Author"
+    },
+    {
+      "DownstreamPathTemplate": "/api/Basket",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "bookstore.api.basket",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Basket",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Basket/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "bookstore.api.basket",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Basket/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ]
+    }
+  ],
+  "Aggregates": [
+    {
+      "RouteKeys": [
+        "AuthorTotal",
+        "BookTotal"
+      ],
+      "UpstreamPathTemplate": "/BookAuthor"
+    }
+  ]
+}
+
